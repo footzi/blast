@@ -117,7 +117,7 @@ export class UI {
   }
 
   showGameWin() {
-    alert('YOU WIN');
+    // alert('YOU WIN');
   }
 
   onRestartButtonClick(callback) {

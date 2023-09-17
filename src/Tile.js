@@ -1,10 +1,9 @@
-import { TILE_HEIGHT, TILE_WIDTH } from './constants';
-import { Graphics } from 'pixi.js';
+import { Sprite } from 'pixi.js';
 import { gsap } from 'gsap';
 
 class Tile {
-  static WIDTH = 40;
-  static HEIGHT = 40;
+  static WIDTH = 41;
+  static HEIGHT = 46;
 
   id = '';
   color = '';
@@ -38,22 +37,18 @@ class Tile {
 }
 
 export class GraphicTile extends Tile {
-  graphic = null;
-
   constructor(gameBlock, options) {
     super(options);
 
-    // @todo подумать как избавиться от gameBlock
     this.gameBlock = gameBlock;
-    this.graphic = new Graphics();
-    this.graphic.eventMode = 'static';
-
-    // this.fallSpeed = 10;
   }
 
   paint({ startPositionY } = {}) {
-    this.graphic.beginFill(this.color);
-    this.graphic.drawRect(0, 0, TILE_WIDTH, TILE_HEIGHT);
+    this.graphic = Sprite.from(`./assets/tiles/${this.color}.png`);
+    this.graphic.width = Tile.WIDTH;
+    this.graphic.height = Tile.HEIGHT;
+
+    this.graphic.eventMode = 'static';
 
     this.graphic.position.x = this.position.x;
     this.graphic.position.y = startPositionY ?? this.position.y;

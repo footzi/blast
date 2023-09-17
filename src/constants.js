@@ -1,6 +1,6 @@
 export const BACKGROUND_COLOR = '#d3d3d3';
 
-export const TILE_COLORS = ['blue', 'red', 'green', 'orange', 'violet'];
+export const TILE_COLORS = ['blue', 'red', 'green', 'yellow', 'purple'];
 
 export const BUSTER_BOMBA_RADIUS = 1;
 
@@ -9,9 +9,6 @@ export const BUSTER_BOMBA_RADIUS = 1;
 
 export const COLUMNS_COUNT = 8;
 export const ROWS_COUNT = 8;
-
-export const TILE_WIDTH = 40;
-export const TILE_HEIGHT = 40;
 
 export const MAX_STEPS = 10;
 export const TARGET_SCOPE = 10;

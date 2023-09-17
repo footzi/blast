@@ -1,7 +1,10 @@
 import { TileController } from './TileController';
-import { Application } from 'pixi.js';
+import { Application, Assets, settings, SCALE_MODES } from 'pixi.js';
 import { BACKGROUND_COLOR, MAX_STEPS, TARGET_SCOPE } from './constants';
 import { UI } from './UI';
+
+settings.ROUND_PIXELS = true;
+settings.SCALE_MODE = SCALE_MODES.NEAREST;
 
 export class Game {
   constructor() {
@@ -19,7 +22,9 @@ export class Game {
     this.progress = 0;
   }
 
-  init() {
+  async init() {
+    await Assets.init({ manifest: './assets/manifest.json' });
+
     this.ui.paint();
     this.ui.updateStep(this.stepsCount);
 

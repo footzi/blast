@@ -1,0 +1,28 @@
+{
+  "bundles":[
+    {
+      "name": "tiles",
+      "assets": [
+        {
+          "name": "blue",
+          "srcs": "blue"
+        },
+        {
+          "name": "green",
+          "srcs": "green"
+        },
+        {
+          "name": "purple",
+          "srcs": "purple"
+        },
+        {
+          "name": "red",
+          "srcs": "red"
+        },{
+          "name": "yellow",
+          "srcs": "yellow"
+        }
+      ]
+    }
+  ]
+}
