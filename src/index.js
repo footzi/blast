@@ -1,1 +1,3 @@
-console.log('hello');
+import { Game } from './Game';
+
+new Game().init();
