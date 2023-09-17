@@ -2,11 +2,13 @@ export const BACKGROUND_COLOR = '#d3d3d3';
 
 export const TILE_COLORS = ['blue', 'red', 'green', 'orange', 'violet'];
 
-export const COLUMNS_COUNT = 4;
-export const ROWS_COUNT = 4;
+export const BUSTER_BOMBA_RADIUS = 1;
 
-// export const COLUMNS_COUNT = 8;
-// export const ROWS_COUNT = 8;
+// export const COLUMNS_COUNT = 4;
+// export const ROWS_COUNT = 4;
+
+export const COLUMNS_COUNT = 8;
+export const ROWS_COUNT = 8;
 
 export const TILE_WIDTH = 40;
 export const TILE_HEIGHT = 40;
@@ -24,6 +26,12 @@ export const MOCK_TITLE2 = {
   '0_3': {
     color: 'green',
   },
+  '0_4': {
+    color: 'green',
+  },
+  '0_5': {
+    color: 'green',
+  },
 
   '1_0': {
     color: 'blue',
@@ -35,6 +43,12 @@ export const MOCK_TITLE2 = {
     color: 'blue',
   },
   '1_3': {
+    color: 'yellow',
+  },
+  '1_4': {
+    color: 'yellow',
+  },
+  '1_5': {
     color: 'yellow',
   },
 
@@ -50,6 +64,12 @@ export const MOCK_TITLE2 = {
   '2_3': {
     color: 'green',
   },
+  '2_4': {
+    color: 'green',
+  },
+  '2_5': {
+    color: 'green',
+  },
 
   '3_0': {
     color: 'blue',
@@ -61,6 +81,50 @@ export const MOCK_TITLE2 = {
     color: 'blue',
   },
   '3_3': {
+    color: 'green',
+  },
+  '3_4': {
+    color: 'green',
+  },
+  '3_5': {
+    color: 'green',
+  },
+
+  '4_0': {
+    color: 'blue',
+  },
+  '4_1': {
+    color: 'green',
+  },
+  '4_2': {
+    color: 'blue',
+  },
+  '4_3': {
+    color: 'green',
+  },
+  '4_4': {
+    color: 'green',
+  },
+  '4_5': {
+    color: 'green',
+  },
+
+  '5_0': {
+    color: 'blue',
+  },
+  '5_1': {
+    color: 'green',
+  },
+  '5_2': {
+    color: 'blue',
+  },
+  '5_3': {
+    color: 'green',
+  },
+  '5_4': {
+    color: 'green',
+  },
+  '5_5': {
     color: 'green',
   },
 };

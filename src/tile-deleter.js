@@ -1,3 +1,5 @@
+import { BUSTER_BOMBA_RADIUS } from './constants';
+
 export const getTileIdsForBurn = (targetTile, tiles) => {
   const result = [];
 
@@ -135,6 +137,29 @@ export const getTileIdsForBurn = (targetTile, tiles) => {
   if (result.length === 1) {
     return [];
   }
+
+  return result;
+};
+
+export const getTilesForBurnBomba = (targetTile, tiles) => {
+  const result = [];
+
+  const minColumn = targetTile.column - BUSTER_BOMBA_RADIUS;
+  const maxColumn = targetTile.column + BUSTER_BOMBA_RADIUS;
+
+  const minRow = targetTile.row - BUSTER_BOMBA_RADIUS;
+  const maxRow = targetTile.row + BUSTER_BOMBA_RADIUS;
+
+  tiles.forEach((column) => {
+    column.forEach((tile) => {
+      const isOnColumns = tile.column <= maxColumn && tile.column >= minColumn;
+      const isOnRows = tile.row <= maxRow && tile.row >= minRow;
+
+      if (isOnColumns && isOnRows) {
+        result.push(tile.id);
+      }
+    });
+  });
 
   return result;
 };

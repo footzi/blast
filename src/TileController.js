@@ -1,12 +1,13 @@
-import { COLUMNS_COUNT, MOCK_TITLE2, ROWS_COUNT, TILE_COLORS } from './constants';
+import { COLUMNS_COUNT, ROWS_COUNT, TILE_COLORS } from './constants';
 import { GraphicTile } from './Tile';
-import { getRandomValueFromArray } from './utils';
-import { getTileIdsForBurn } from './tile-deleter';
+import { getRandomValueFromArray, mixArray } from './utils';
+import { getTileIdsForBurn, getTilesForBurnBomba } from './tile-deleter';
 
 export class TileController {
   constructor(gameBlock) {
     this.gameBlock = gameBlock;
     this.tiles = [];
+    this.isBusterBombaActive = false;
   }
 
   generateTiles() {
@@ -14,8 +15,8 @@ export class TileController {
       const column = [];
 
       for (let j = 0; j < ROWS_COUNT; j++) {
-        const { color } = MOCK_TITLE2[`${i}_${j}`];
-        // const color = getRandomValueFromArray(TILE_COLORS);
+        // const { color } = MOCK_TITLE2[`${i}_${j}`];
+        const color = getRandomValueFromArray(TILE_COLORS);
         const tile = new GraphicTile(this.gameBlock, { row: j, column: i, color });
 
         column.push(tile);
@@ -31,7 +32,7 @@ export class TileController {
       column.forEach((tile) => {
         // todo в метод
         tile.paint();
-        tile.onPointerDown(this.handleClickTile.bind(this));
+        tile.onClick(this.handleClickTile.bind(this));
       });
     });
   }
@@ -45,7 +46,7 @@ export class TileController {
   }
 
   removeTiles(tile) {
-    const ids = getTileIdsForBurn(tile, this.tiles);
+    const ids = this.isBusterBombaActive ? getTilesForBurnBomba(tile, this.tiles) : getTileIdsForBurn(tile, this.tiles);
 
     this.tiles = this.tiles.map((column) => {
       return column.map((tile) => {
@@ -85,8 +86,6 @@ export class TileController {
       }
       this.tiles[i] = newColumn;
     }
-
-    console.log(this.tiles);
   }
 
   addNewTiles() {
@@ -102,14 +101,12 @@ export class TileController {
           // todo в метод
 
           newTile.paint({ startPositionY });
-          newTile.onPointerDown(this.handleClickTile.bind(this));
+          newTile.onClick(this.handleClickTile.bind(this));
 
           return newTile;
         } else return tile;
       });
     });
-
-    console.log(this.tiles);
   }
 
   animateTiles() {
@@ -140,5 +137,23 @@ export class TileController {
     //     }
     //   });
     // });
+  }
+
+  mixTiles() {
+    this.tiles = mixArray(this.tiles).map((column, columnIndex) => {
+      return mixArray(column).map((tile, rowIndex) => {
+        const row = rowIndex;
+        const column = columnIndex;
+
+        tile.updatePosition({ column, row });
+        tile.repaint();
+
+        return tile;
+      });
+    });
+  }
+
+  setIsBusterBombaActive() {
+    this.isBusterBombaActive = true;
   }
 }

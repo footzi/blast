@@ -61,25 +61,31 @@ export class GraphicTile extends Tile {
     this.gameBlock.addChild(this.graphic);
   }
 
+  repaint() {
+    this.graphic.position.x = this.position.x;
+    this.graphic.position.y = this.position.y;
+  }
+
   remove() {
     // @todo реализовать анимацию без gsap
     gsap.to(this.graphic, {
       alpha: 0,
       ease: 'expo.out',
-      duration: 0.5,
+      duration: 0.6,
       onComplete: () => {
         this.gameBlock.removeChild(this.graphic);
       },
     });
   }
 
-  onPointerDown(callback) {
+  onClick(callback) {
     this.graphic.on('pointerdown', () => callback(this));
   }
 
   animateSlideDown() {
     gsap.to(this.graphic, {
       y: this.position.y,
+      delay: 0.1,
       duration: 0.5,
       ease: 'circ.out',
     });
