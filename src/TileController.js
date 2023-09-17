@@ -4,10 +4,12 @@ import { getRandomValueFromArray, mixArray } from './utils';
 import { getTileIdsForBurn, getTilesForBurnBomba } from './tile-deleter';
 
 export class TileController {
-  constructor(gameBlock) {
+  constructor(gameBlock, callbacks) {
     this.gameBlock = gameBlock;
     this.tiles = [];
     this.isBusterBombaActive = false;
+
+    this.onStep = callbacks.onStep;
   }
 
   generateTiles() {
@@ -19,6 +21,9 @@ export class TileController {
         const color = getRandomValueFromArray(TILE_COLORS);
         const tile = new GraphicTile(this.gameBlock, { row: j, column: i, color });
 
+        tile.paint();
+        tile.onClick(this.handleClickTile.bind(this));
+
         column.push(tile);
       }
 
@@ -26,23 +31,28 @@ export class TileController {
     }
   }
 
-  // todo МБ сразу рисовать???
-  paintTiles() {
+  regenerate() {
     this.tiles.forEach((column) => {
       column.forEach((tile) => {
-        // todo в метод
-        tile.paint();
-        tile.onClick(this.handleClickTile.bind(this));
+        if (tile) {
+          tile.remove();
+        }
       });
     });
+    this.tiles = [];
+    this.generateTiles();
   }
 
   handleClickTile(tile) {
-    this.removeTiles(tile);
+    const ids = this.removeTiles(tile);
 
-    this.changePositionTiles();
-    this.addNewTiles();
-    this.animateTiles();
+    if (ids.length) {
+      this.changePositionTiles();
+      this.addNewTiles();
+      this.animateTiles();
+
+      this.onStep(ids.length);
+    }
   }
 
   removeTiles(tile) {
@@ -59,6 +69,8 @@ export class TileController {
         return tile;
       });
     });
+
+    return ids;
   }
 
   changePositionTiles() {
