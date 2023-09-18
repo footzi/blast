@@ -25,13 +25,12 @@ export class Progress {
     this.paintBackground();
     this.paintText();
     this.paintBar();
-
-    this.rootContainer.addChild(this.container);
   }
 
   paintContainer() {
     this.container.setTransform(Progress.BACKGROUND_MARGIN_LEFT);
     this.container.name = 'progress';
+    this.rootContainer.addChild(this.container);
   }
 
   paintBackground() {

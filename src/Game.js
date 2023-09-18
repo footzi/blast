@@ -31,7 +31,7 @@ export class Game {
 
     this.field.paint();
     this.ui.paint();
-    // this.ui.updateStep(this.stepsCount);
+    this.ui.updateSteps(this.stepsCount);
     this.tileController.generateTiles();
 
     // this.ui.onMixingButtonClick(() => {
@@ -65,8 +65,9 @@ export class Game {
     if (this.progress <= 1) {
       this.ui.updateProgress(this.progress);
     }
-    // this.ui.updateScore(this.score);
-    // this.ui.updateStep(this.stepsCount);
+
+    this.ui.updateScore(this.score);
+    this.ui.updateSteps(this.stepsCount);
 
     if (this.stepsCount === 0) {
       // this.ui.showGameFailed();

@@ -43,6 +43,18 @@
         {
           "name": "progress-bar",
           "srcs": "progress-bar"
+        },
+        {
+          "name": "score-panel",
+          "srcs": "score-panel"
+        },
+        {
+          "name": "steps-background",
+          "srcs": "steps-background"
+        },
+        {
+          "name": "score-background",
+          "srcs": "score-background"
         }
       ]
     }
