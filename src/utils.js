@@ -15,3 +15,10 @@ export const mixArray = (array) => {
 
   return newArray;
 };
+
+export const getRatioSize = (newWidth, { width, height }) => {
+  return {
+    width: newWidth,
+    height: (newWidth / width) * height,
+  };
+};

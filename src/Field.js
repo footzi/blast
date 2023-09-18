@@ -10,10 +10,7 @@ export class Field {
     this.gameBlock = gameBlock;
     this.container = new Container();
     this.tilesContainer = new Container();
-    this.sprite = Sprite.from(`./assets/ui/field.png`, {
-      width: 100,
-      height: 100,
-    });
+    this.sprite = Sprite.from('./assets/ui/field.png');
   }
 
   paint() {

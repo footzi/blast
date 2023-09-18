@@ -29,6 +29,7 @@
     "lint"
   ],
   "dependencies": {
+    "fontfaceobserver": "^2.3.0",
     "gsap": "^3.12.2",
     "pixi.js": "^7.2.4"
   }

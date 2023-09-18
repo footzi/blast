@@ -8,7 +8,7 @@ const textStyle = {
   align: 'center',
 };
 
-export class UI {
+export class UIOld {
   constructor(block) {
     this.block = block;
     this.mixingButton = new Graphics();
