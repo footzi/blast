@@ -1,15 +1,18 @@
 import { Progress } from './Progress';
 import { ScorePanel } from './ScorePanel';
+import { Bonuses } from './Bonuses';
 
 export class UI {
   constructor(rootContainer) {
     this.progress = new Progress(rootContainer);
     this.score = new ScorePanel(rootContainer);
+    this.bonuses = new Bonuses(rootContainer);
   }
 
   paint() {
     this.progress.paint();
     this.score.paint();
+    this.bonuses.paint();
   }
 
   updateProgress(value) {

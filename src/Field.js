@@ -2,7 +2,7 @@ import { Container, Sprite } from 'pixi.js';
 import { COLUMNS_COUNT, ROWS_COUNT, TILE_HEIGHT, TILE_WIDTH } from './constants';
 
 export class Field {
-  static MARGIN_TOP = 200;
+  static MARGIN_TOP = 150;
   static MARGIN_LEFT = 30;
   static PADDING = 10;
 

@@ -55,6 +55,10 @@
         {
           "name": "score-background",
           "srcs": "score-background"
+        },
+        {
+          "name": "bonus-background",
+          "srcs": "bonus-background"
         }
       ]
     }

@@ -4,7 +4,7 @@ import { getRatioSize } from '../utils';
 export class ScorePanel {
   static BACKGROUND_WIDTH = 300;
   static BACKGROUND_MARGIN_LEFT = 500;
-  static BACKGROUND_MARGIN_TOP = 230;
+  static BACKGROUND_MARGIN_TOP = 160;
 
   static STEPS_WIDTH = 150;
   static STEPS_MARGIN_TOP = 5;
