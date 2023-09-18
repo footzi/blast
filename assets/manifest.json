@@ -1,5 +1,5 @@
 {
-  "bundles":[
+  "bundles": [
     {
       "name": "tiles",
       "assets": [
@@ -18,9 +18,19 @@
         {
           "name": "red",
           "srcs": "red"
-        },{
+        },
+        {
           "name": "yellow",
           "srcs": "yellow"
+        }
+      ]
+    },
+    {
+      "name": "ui",
+      "assets": [
+        {
+          "name": "field",
+          "srcs": "field"
         }
       ]
     }

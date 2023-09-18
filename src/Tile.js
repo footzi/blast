@@ -1,10 +1,8 @@
 import { Sprite } from 'pixi.js';
 import { gsap } from 'gsap';
+import { TILE_HEIGHT, TILE_WIDTH } from './constants';
 
 class Tile {
-  static WIDTH = 41;
-  static HEIGHT = 46;
-
   id = '';
   color = '';
   position = {
@@ -17,8 +15,8 @@ class Tile {
   constructor({ row, column, color }) {
     this.id = `${column}_${row}`;
     this.position = {
-      x: column * Tile.WIDTH,
-      y: row * Tile.HEIGHT,
+      x: column * TILE_WIDTH,
+      y: row * TILE_HEIGHT,
     };
     this.row = row;
     this.column = column;
@@ -28,8 +26,8 @@ class Tile {
   updatePosition({ row, column }) {
     this.id = `${column}_${row}`;
     this.position = {
-      x: column * Tile.WIDTH,
-      y: row * Tile.HEIGHT,
+      x: column * TILE_WIDTH,
+      y: row * TILE_HEIGHT,
     };
     this.row = row;
     this.column = column;
@@ -37,23 +35,24 @@ class Tile {
 }
 
 export class GraphicTile extends Tile {
-  constructor(gameBlock, options) {
+  constructor(field, options) {
     super(options);
 
-    this.gameBlock = gameBlock;
+    this.field = field;
+    this.graphic = Sprite.from(`./assets/tiles/${this.color}.png`);
+    this.graphic.name = 'tile';
+    this.graphic.eventMode = 'static';
+    this.graphic.cursor = 'pointer';
   }
 
   paint({ startPositionY } = {}) {
-    this.graphic = Sprite.from(`./assets/tiles/${this.color}.png`);
-    this.graphic.width = Tile.WIDTH;
-    this.graphic.height = Tile.HEIGHT;
-
-    this.graphic.eventMode = 'static';
+    this.graphic.width = TILE_WIDTH;
+    this.graphic.height = TILE_HEIGHT;
 
     this.graphic.position.x = this.position.x;
     this.graphic.position.y = startPositionY ?? this.position.y;
 
-    this.gameBlock.addChild(this.graphic);
+    this.field.addChild(this.graphic);
   }
 
   repaint() {
@@ -68,7 +67,7 @@ export class GraphicTile extends Tile {
       ease: 'expo.out',
       duration: 0.6,
       onComplete: () => {
-        this.gameBlock.removeChild(this.graphic);
+        this.field.removeChild(this.graphic);
       },
     });
   }

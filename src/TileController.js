@@ -1,11 +1,11 @@
-import { COLUMNS_COUNT, ROWS_COUNT, TILE_COLORS } from './constants';
+import { COLUMNS_COUNT, ROWS_COUNT, TILE_COLORS, TILE_WIDTH } from './constants';
 import { GraphicTile } from './Tile';
 import { getRandomValueFromArray, mixArray } from './utils';
 import { getTileIdsForBurn, getTilesForBurnBomba } from './tile-deleter';
 
 export class TileController {
-  constructor(gameBlock, callbacks) {
-    this.gameBlock = gameBlock;
+  constructor(field, callbacks) {
+    this.field = field;
     this.tiles = [];
     this.isBusterBombaActive = false;
 
@@ -19,7 +19,7 @@ export class TileController {
       for (let j = 0; j < ROWS_COUNT; j++) {
         // const { color } = MOCK_TITLE2[`${i}_${j}`];
         const color = getRandomValueFromArray(TILE_COLORS);
-        const tile = new GraphicTile(this.gameBlock, { row: j, column: i, color });
+        const tile = new GraphicTile(this.field, { row: j, column: i, color });
 
         tile.paint();
         tile.onClick(this.handleClickTile.bind(this));
@@ -107,9 +107,9 @@ export class TileController {
           const row = rowIndex;
           const column = columnIndex;
           const color = getRandomValueFromArray(TILE_COLORS);
-          const startPositionY = -(rowIndex + 1) * GraphicTile.WIDTH;
+          const startPositionY = -(rowIndex + 1) * TILE_WIDTH;
 
-          const newTile = new GraphicTile(this.gameBlock, { row, column, color });
+          const newTile = new GraphicTile(this.field, { row, column, color });
           // todo в метод
 
           newTile.paint({ startPositionY });
