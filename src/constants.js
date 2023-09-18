@@ -7,6 +7,7 @@ export const BUSTER_BOMBA_RADIUS = 1;
 // export const COLUMNS_COUNT = 4;
 // export const ROWS_COUNT = 4;
 
+export const NEW_TILE_POSITION = -100;
 export const TILE_WIDTH = 41;
 export const TILE_HEIGHT = 46;
 

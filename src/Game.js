@@ -1,10 +1,8 @@
 import { TileController } from './TileController';
-import { Application, Assets, settings, SCALE_MODES } from 'pixi.js';
+import { Application, Assets } from 'pixi.js';
 import { BACKGROUND_COLOR, MAX_STEPS, TARGET_SCOPE } from './constants';
 import { UI } from './UI';
-
-settings.ROUND_PIXELS = true;
-settings.SCALE_MODE = SCALE_MODES.NEAREST;
+import { Field } from './Field';
 
 export class Game {
   constructor() {
@@ -12,7 +10,9 @@ export class Game {
     document.body.appendChild(this.app.view);
     globalThis.__PIXI_APP__ = this.app;
 
-    this.tileController = new TileController(this.app.stage, {
+    this.field = new Field(this.app.stage);
+
+    this.tileController = new TileController(this.field.getContainer(), {
       onStep: this.handleS.bind(this),
     });
     this.ui = new UI(this.app.stage);
@@ -25,8 +25,10 @@ export class Game {
   async init() {
     await Assets.init({ manifest: './assets/manifest.json' });
 
+    this.field.paint();
     this.ui.paint();
     this.ui.updateStep(this.stepsCount);
+    this.tileController.generateTiles();
 
     this.ui.onMixingButtonClick(() => {
       this.tileController.mixTiles();
@@ -39,8 +41,6 @@ export class Game {
     this.ui.onRestartButtonClick(() => {
       this.restart();
     });
-
-    this.tileController.generateTiles();
   }
 
   restart() {

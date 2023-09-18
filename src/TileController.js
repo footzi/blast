@@ -1,4 +1,4 @@
-import { COLUMNS_COUNT, ROWS_COUNT, TILE_COLORS, TILE_WIDTH } from './constants';
+import { COLUMNS_COUNT, NEW_TILE_POSITION, ROWS_COUNT, TILE_COLORS, TILE_WIDTH } from './constants';
 import { GraphicTile } from './Tile';
 import { getRandomValueFromArray, mixArray } from './utils';
 import { getTileIdsForBurn, getTilesForBurnBomba } from './tile-deleter';
@@ -107,7 +107,7 @@ export class TileController {
           const row = rowIndex;
           const column = columnIndex;
           const color = getRandomValueFromArray(TILE_COLORS);
-          const startPositionY = -(rowIndex + 1) * TILE_WIDTH;
+          const startPositionY = NEW_TILE_POSITION + TILE_WIDTH * rowIndex + 1;
 
           const newTile = new GraphicTile(this.field, { row, column, color });
           // todo в метод
