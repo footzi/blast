@@ -1,0 +1,70 @@
+{
+  "bundles": [
+    {
+      "name": "tiles",
+      "assets": [
+        {
+          "name": "blue",
+          "srcs": "blue"
+        },
+        {
+          "name": "green",
+          "srcs": "green"
+        },
+        {
+          "name": "purple",
+          "srcs": "purple"
+        },
+        {
+          "name": "red",
+          "srcs": "red"
+        },
+        {
+          "name": "yellow",
+          "srcs": "yellow"
+        }
+      ]
+    },
+    {
+      "name": "ui",
+      "assets": [
+        {
+          "name": "field",
+          "srcs": "field"
+        },
+        {
+          "name": "bar",
+          "srcs": "bar"
+        },
+        {
+          "name": "bar-background",
+          "srcs": "bar-background"
+        },
+        {
+          "name": "progress-bar",
+          "srcs": "progress-bar"
+        },
+        {
+          "name": "score-panel",
+          "srcs": "score-panel"
+        },
+        {
+          "name": "steps-background",
+          "srcs": "steps-background"
+        },
+        {
+          "name": "score-background",
+          "srcs": "score-background"
+        },
+        {
+          "name": "bonus-background",
+          "srcs": "bonus-background"
+        },
+        {
+          "name": "button-background",
+          "srcs": "button-background"
+        }
+      ]
+    }
+  ]
+}
