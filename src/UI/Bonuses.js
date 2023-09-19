@@ -13,13 +13,19 @@ export class Bonus {
   }
 
   paint() {
+    this.paintContainer();
     this.paintBackground();
     this.paintName();
     this.paintValue();
   }
 
+  paintContainer() {
+    this.container.name = 'bonusContainer';
+    this.container.setTransform(this.options.x, this.options.y);
+    this.rootContainer.addChild(this.container);
+  }
+
   paintBackground() {
-    this.background.setTransform(this.options.x, this.options.y);
     this.background.name = 'bonus';
 
     const size = getRatioSize(Bonus.WIDTH, {
@@ -31,7 +37,6 @@ export class Bonus {
     this.background.height = size.height;
 
     this.container.addChild(this.background);
-    this.rootContainer.addChild(this.container);
   }
 
   paintName() {
@@ -48,7 +53,7 @@ export class Bonus {
 
     name.anchor.set(0.5, 0);
     name.x = this.container.width / 2;
-    name.y = 65;
+    name.y = 15;
 
     this.container.addChild(name);
   }
@@ -65,8 +70,8 @@ export class Bonus {
       })
     );
 
-    value.x = 36;
-    value.y = 104;
+    value.x = 40;
+    value.y = 60;
 
     this.container.addChild(value);
   }
@@ -76,7 +81,7 @@ export class Bonus {
 
 export class Bonuses {
   static MARGIN_TOP = 460;
-  static MARGIN_LEFT = 500;
+  static MARGIN_LEFT = 550;
   static WIDTH = 200;
 
   static MIX_BONUS_MARGIN_TOP = 45;
@@ -126,7 +131,7 @@ export class Bonuses {
     );
 
     text.anchor.set(0.5, 0);
-    text.x = this.container.width / 2;
+    text.x = Bonuses.WIDTH / 2;
 
     this.container.addChild(text);
     this.rootContainer.addChild(this.container);
