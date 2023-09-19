@@ -109,7 +109,7 @@ export class Bonuses {
       name: 'Mix',
     });
 
-    this.bombaBonus = new Bonus(this.container, {
+    this.busterBombaBonus = new Bonus(this.container, {
       x: Bonuses.BOMBA_BONUS_MARGIN_LEFT,
       y: Bonuses.BOMBA_BONUS_MARGIN_TOP,
       name: 'Bomb',
@@ -120,7 +120,7 @@ export class Bonuses {
     this.paintBonuses();
 
     this.mixBonus.paint();
-    this.bombaBonus.paint();
+    this.busterBombaBonus.paint();
   }
 
   paintBonuses() {
@@ -151,10 +151,14 @@ export class Bonuses {
   }
 
   onBombClick(callback) {
-    this.bombaBonus.onClick(callback);
+    this.busterBombaBonus.onClick(callback);
   }
 
   updateMixCount(value) {
     this.mixBonus.updateValue(value);
+  }
+
+  updateBusterBombaCount(value) {
+    this.busterBombaBonus.updateValue(value);
   }
 }

@@ -1,5 +1,3 @@
-import { BUSTER_BOMBA_RADIUS } from './constants';
-
 export const getTileIdsForBurn = (targetTile, tiles) => {
   const result = [];
 
@@ -141,14 +139,14 @@ export const getTileIdsForBurn = (targetTile, tiles) => {
   return result;
 };
 
-export const getTilesForBurnBomba = (targetTile, tiles) => {
+export const getTilesForBurnBusterBomba = (targetTile, tiles, busterBombaBonusRadius) => {
   const result = [];
 
-  const minColumn = targetTile.column - BUSTER_BOMBA_RADIUS;
-  const maxColumn = targetTile.column + BUSTER_BOMBA_RADIUS;
+  const minColumn = targetTile.column - busterBombaBonusRadius;
+  const maxColumn = targetTile.column + busterBombaBonusRadius;
 
-  const minRow = targetTile.row - BUSTER_BOMBA_RADIUS;
-  const maxRow = targetTile.row + BUSTER_BOMBA_RADIUS;
+  const minRow = targetTile.row - busterBombaBonusRadius;
+  const maxRow = targetTile.row + busterBombaBonusRadius;
 
   tiles.forEach((column) => {
     column.forEach((tile) => {

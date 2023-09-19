@@ -1,13 +1,14 @@
 import { COLUMNS_COUNT, NEW_TILE_POSITION, ROWS_COUNT, TILE_COLORS, TILE_WIDTH } from './constants';
 import { GraphicTile } from './Tile';
 import { getRandomValueFromArray, mixArray } from './utils';
-import { getTileIdsForBurn, getTilesForBurnBomba } from './tile-deleter';
+import { getTileIdsForBurn, getTilesForBurnBusterBomba } from './tile-deleter';
 
 export class TileController {
-  constructor(field, callbacks) {
+  constructor(field, callbacks, gameOptions) {
     this.field = field;
     this.tiles = [];
     this.isBusterBombaActive = false;
+    this.gameOptions = gameOptions;
 
     this.onStep = callbacks.onStep;
   }
@@ -53,10 +54,16 @@ export class TileController {
 
       this.onStep(ids.length);
     }
+
+    this.isBusterBombaActive = false;
   }
 
   removeTiles(tile) {
-    const ids = this.isBusterBombaActive ? getTilesForBurnBomba(tile, this.tiles) : getTileIdsForBurn(tile, this.tiles);
+    const busterBombaBonusRadius = this.gameOptions.busterBombaBonusRadius;
+
+    const ids = this.isBusterBombaActive
+      ? getTilesForBurnBusterBomba(tile, this.tiles, busterBombaBonusRadius)
+      : getTileIdsForBurn(tile, this.tiles);
 
     this.tiles = this.tiles.map((column) => {
       return column.map((tile) => {

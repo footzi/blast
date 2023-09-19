@@ -38,4 +38,8 @@ export class UI {
   updateMixCount(value) {
     this.bonuses.updateMixCount(value);
   }
+
+  updateBusterBombaCount(value) {
+    this.bonuses.updateBusterBombaCount(value);
+  }
 }

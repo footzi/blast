@@ -2,8 +2,6 @@ export const BACKGROUND_COLOR = '#d3d3d3';
 
 export const TILE_COLORS = ['blue', 'red', 'green', 'yellow', 'purple'];
 
-export const BUSTER_BOMBA_RADIUS = 1;
-
 // export const COLUMNS_COUNT = 4;
 // export const ROWS_COUNT = 4;
 

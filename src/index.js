@@ -2,6 +2,8 @@ import { Game } from './Game';
 
 new Game({
   maxMixBonusCount: 5,
+  maxBusterBombaBonusCount: 3,
+  busterBombaBonusRadius: 2,
 }).init();
 
 // import { Application, Container, Graphics, Sprite } from 'pixi.js';

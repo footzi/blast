@@ -15,12 +15,17 @@ export class Game {
 
     this.field = new Field(this.app.stage);
 
-    this.tileController = new TileController(this.field.getContainer(), {
-      onStep: this.handleS.bind(this),
-    });
+    this.tileController = new TileController(
+      this.field.getContainer(),
+      {
+        onStep: this.handleS.bind(this),
+      },
+      this.gameOptions
+    );
     this.ui = new UI(this.app.stage);
 
     this.mixBonusCount = this.gameOptions.maxMixBonusCount;
+    this.busterBombaBonusCount = this.gameOptions.maxBusterBombaBonusCount;
     this.score = 0;
     this.stepsCount = MAX_STEPS;
     this.progress = 0;
@@ -36,10 +41,12 @@ export class Game {
     this.ui.paint();
     this.ui.updateSteps(this.stepsCount);
     this.ui.updateMixCount(this.mixBonusCount);
+    this.ui.updateBusterBombaCount(this.busterBombaBonusCount);
 
     this.tileController.generateTiles();
 
     this.ui.onMixBonusClick(this.mixTiles.bind(this));
+    this.ui.onBombaBonusClick(this.busterBombaActivate.bind(this));
     //
     // this.ui.onBusterBombaClick(() => {
     //   this.tileController.setIsBusterBombaActive();
@@ -65,6 +72,15 @@ export class Game {
     if (this.mixBonusCount >= 0) {
       this.ui.updateMixCount(this.mixBonusCount);
       this.tileController.mixTiles();
+    }
+  }
+
+  busterBombaActivate() {
+    this.busterBombaBonusCount--;
+
+    if (this.busterBombaBonusCount >= 0) {
+      this.tileController.setIsBusterBombaActive();
+      this.ui.updateBusterBombaCount(this.busterBombaBonusCount);
     }
   }
 
