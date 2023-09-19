@@ -1,8 +1,8 @@
 import { Game } from './Game';
 
 const game = new Game({
-  columnsCount: 8,
-  rowsCount: 9,
+  columnsCount: 9,
+  rowsCount: 8,
   maxSteps: 20,
   targetScope: 100,
   maxMixBonusCount: 5,
