@@ -1,8 +1,12 @@
 import { Sprite } from 'pixi.js';
 import { gsap } from 'gsap';
-import { TILE_HEIGHT, TILE_WIDTH } from './constants';
 
-class Tile {
+export class Tile {
+  static WIDTH = 41;
+  static HEIGHT = 46;
+  static NEW_POSITION = -50;
+  static COLORS = ['blue', 'red', 'green', 'yellow', 'purple'];
+
   id = '';
   color = '';
   position = {
@@ -15,8 +19,8 @@ class Tile {
   constructor({ row, column, color }) {
     this.id = `${column}_${row}`;
     this.position = {
-      x: column * TILE_WIDTH,
-      y: row * TILE_HEIGHT,
+      x: column * Tile.WIDTH,
+      y: row * Tile.HEIGHT,
     };
     this.row = row;
     this.column = column;
@@ -26,8 +30,8 @@ class Tile {
   updatePosition({ row, column }) {
     this.id = `${column}_${row}`;
     this.position = {
-      x: column * TILE_WIDTH,
-      y: row * TILE_HEIGHT,
+      x: column * Tile.WIDTH,
+      y: row * Tile.HEIGHT,
     };
     this.row = row;
     this.column = column;
@@ -46,8 +50,8 @@ export class GraphicTile extends Tile {
   }
 
   paint({ startPositionY } = {}) {
-    this.graphic.width = TILE_WIDTH;
-    this.graphic.height = TILE_HEIGHT;
+    this.graphic.width = Tile.WIDTH;
+    this.graphic.height = Tile.HEIGHT;
 
     this.graphic.position.x = this.position.x;
     this.graphic.position.y = startPositionY ?? this.position.y;

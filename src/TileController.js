@@ -1,5 +1,4 @@
-import { COLUMNS_COUNT, NEW_TILE_POSITION, ROWS_COUNT, TILE_COLORS, TILE_WIDTH } from './constants';
-import { GraphicTile } from './Tile';
+import { GraphicTile, Tile } from './Tile';
 import { getRandomValueFromArray, mixArray } from './utils';
 import { getTileIdsForBurn, getTilesForBurnBusterBomba } from './tile-deleter';
 
@@ -15,12 +14,11 @@ export class TileController {
   }
 
   generateTiles() {
-    for (let i = 0; i < COLUMNS_COUNT; i++) {
+    for (let i = 0; i < this.gameOptions.columnsCount; i++) {
       const column = [];
 
-      for (let j = 0; j < ROWS_COUNT; j++) {
-        // const { color } = MOCK_TITLE2[`${i}_${j}`];
-        const color = getRandomValueFromArray(TILE_COLORS);
+      for (let j = 0; j < this.gameOptions.rowsCount; j++) {
+        const color = getRandomValueFromArray(Tile.COLORS);
         const tile = new GraphicTile(this.field, { row: j, column: i, color });
 
         tile.paint();
@@ -120,11 +118,10 @@ export class TileController {
         if (!tile) {
           const row = rowIndex;
           const column = columnIndex;
-          const color = getRandomValueFromArray(TILE_COLORS);
-          const startPositionY = NEW_TILE_POSITION + TILE_WIDTH * rowIndex + 1;
+          const color = getRandomValueFromArray(Tile.COLORS);
+          const startPositionY = Tile.NEW_POSITION + Tile.HEIGHT * rowIndex + 1;
 
           const newTile = new GraphicTile(this.field, { row, column, color });
-          // todo в метод
 
           newTile.paint({ startPositionY });
           newTile.onClick(this.handleClickTile.bind(this));

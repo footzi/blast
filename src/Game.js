@@ -1,19 +1,20 @@
 import { TileController } from './TileController';
 import { Application, Assets } from 'pixi.js';
 import FontFaceObserver from 'fontfaceobserver';
-import { BACKGROUND_COLOR } from './constants';
 import { UI } from './UI';
 import { Field } from './Field';
 
 export class Game {
+  static BACKGROUND_COLOR = '#d3d3d3';
+
   constructor(options) {
     this.gameOptions = options;
 
-    this.app = new Application({ background: BACKGROUND_COLOR, resizeTo: window });
+    this.app = new Application({ background: Game.BACKGROUND_COLOR, resizeTo: window });
     document.body.appendChild(this.app.view);
     globalThis.__PIXI_APP__ = this.app;
 
-    this.field = new Field(this.app.stage);
+    this.field = new Field(this.app.stage, this.gameOptions);
 
     this.tileController = new TileController(
       this.field.getContainer(),
