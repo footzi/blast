@@ -1,4 +1,5 @@
 import { Container, Graphics, Sprite, Text, TextStyle } from 'pixi.js';
+import { gsap } from 'gsap';
 import { getRatioSize } from '../utils';
 
 export class GameStatusModal {
@@ -57,13 +58,19 @@ export class GameStatusModal {
 
     const x = window.innerWidth / 2 - GameStatusModal.MODAL_WIDTH / 2;
     const y = window.innerHeight / 2 - GameStatusModal.MODAL_HEIGHT / 2;
-    this.modalContainer.setTransform(x, y);
+    this.modalContainer.setTransform(x, 0);
 
     this.background.width = GameStatusModal.MODAL_WIDTH;
     this.background.height = GameStatusModal.MODAL_HEIGHT;
 
     this.modalContainer.addChild(this.background);
     this.container.addChild(this.modalContainer);
+
+    gsap.to(this.modalContainer, {
+      y,
+      duration: 1,
+      ease: 'bounce.out',
+    });
   }
 
   paintTitle() {
