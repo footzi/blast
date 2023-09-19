@@ -1,6 +1,6 @@
 import { GraphicTile, Tile } from './Tile';
 import { getRandomValueFromArray, mixArray } from './utils';
-import { getTileIdsForBurn, getTilesForBurnBusterBomba } from './tile-deleter';
+import { TileDeleter } from './TileDeleter';
 
 export class TileController {
   constructor(field, callbacks, gameOptions) {
@@ -67,8 +67,11 @@ export class TileController {
     const busterBombaBonusRadius = this.gameOptions.busterBombaBonusRadius;
 
     const ids = this.isBusterBombaActive
-      ? getTilesForBurnBusterBomba(tile, this.tiles, busterBombaBonusRadius)
-      : getTileIdsForBurn(tile, this.tiles);
+      ? TileDeleter.getTilesForDeleteBusterBomba(tile, this.tiles, busterBombaBonusRadius)
+      : TileDeleter.getTilesForDelete(tile, this.tiles);
+
+    console.log(tile);
+    console.log(this.tiles);
 
     this.tiles = this.tiles.map((column) => {
       return column.map((tile) => {

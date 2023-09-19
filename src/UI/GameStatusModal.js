@@ -110,7 +110,7 @@ export class GameStatusModal {
     this.buttonBackground.height = size.height;
 
     const text = new Text(
-      'Попробовать еще?',
+      'Попробовать еще',
       new TextStyle({
         fontFamily: 'ShantellSans',
         fontSize: 20,
