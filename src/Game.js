@@ -1,6 +1,6 @@
-import { TileController } from './TileController';
 import { Application, Assets } from 'pixi.js';
 import FontFaceObserver from 'fontfaceobserver';
+import { TileController } from './TileController';
 import { UI } from './UI';
 import { Field } from './Field';
 
