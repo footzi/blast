@@ -96,7 +96,7 @@ export class TileDeleter {
     return result;
   }
 
-  getTilesForDeleteBusterBomba(targetTile, tiles, busterBombaBonusRadius) {
+  static getTilesForDeleteBusterBomba(targetTile, tiles, busterBombaBonusRadius) {
     const result = [];
 
     const minColumn = targetTile.column - busterBombaBonusRadius;

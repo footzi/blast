@@ -70,9 +70,6 @@ export class TileController {
       ? TileDeleter.getTilesForDeleteBusterBomba(tile, this.tiles, busterBombaBonusRadius)
       : TileDeleter.getTilesForDelete(tile, this.tiles);
 
-    console.log(tile);
-    console.log(this.tiles);
-
     this.tiles = this.tiles.map((column) => {
       return column.map((tile) => {
         if (ids.includes(tile?.id)) {
