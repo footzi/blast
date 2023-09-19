@@ -18,7 +18,7 @@ export class Game {
     this.tileController = new TileController(
       this.field.getContainer(),
       {
-        onStep: this.handleS.bind(this),
+        onStep: this.handleChangeStep.bind(this),
       },
       this.gameOptions
     );
@@ -63,6 +63,8 @@ export class Game {
     this.ui.updateMixCount(this.mixBonusCount);
     this.ui.updateBusterBombaCount(this.busterBombaBonusCount);
     this.ui.updateProgress(this.progress);
+
+    this.tileController.setGameFinished(false);
   }
 
   mixTiles() {
@@ -83,25 +85,43 @@ export class Game {
     }
   }
 
-  handleS(burnedCount) {
+  handleChangeStep(burnedCount) {
+    this.updateScore(burnedCount);
+    this.updateProgress();
+
+    this.checkGameFailed();
+    this.checkGameWin();
+  }
+
+  updateScore(burnedCount) {
     this.score = this.score + burnedCount;
     this.stepsCount = --this.stepsCount;
 
-    this.progress = Number((this.score / this.gameOptions.targetScope).toFixed(2));
-
-    if (this.progress <= 1) {
-      this.ui.updateProgress(this.progress);
-    }
-
     this.ui.updateScore(this.score);
     this.ui.updateSteps(this.stepsCount);
+  }
 
-    if (this.stepsCount === 0) {
+  updateProgress() {
+    const progressValue = Number((this.score / this.gameOptions.targetScope).toFixed(2));
+    this.progress = progressValue <= 1 ? progressValue : 1;
+    this.ui.updateProgress(this.progress);
+  }
+
+  checkGameFailed() {
+    if (this.stepsCount === 0 && this.score < this.gameOptions.targetScope) {
       this.ui.showGameFailed();
+      this.finishGame();
     }
+  }
 
+  checkGameWin() {
     if (this.score >= this.gameOptions.targetScope) {
       this.ui.showGameWin();
+      this.finishGame();
     }
+  }
+
+  finishGame() {
+    this.tileController.setGameFinished(true);
   }
 }

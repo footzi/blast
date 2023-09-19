@@ -31,7 +31,7 @@ export class GameStatusModal {
   }
 
   hide() {
-    this.container.destroy();
+    this.container.removeChildren();
   }
 
   paintContainer() {

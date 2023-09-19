@@ -8,6 +8,7 @@ export class TileController {
     this.field = field;
     this.tiles = [];
     this.isBusterBombaActive = false;
+    this.gameFinished = false;
     this.gameOptions = gameOptions;
 
     this.onStep = callbacks.onStep;
@@ -45,6 +46,8 @@ export class TileController {
   }
 
   handleClickTile(tile) {
+    if (this.gameFinished) return;
+
     const ids = this.removeTiles(tile);
 
     if (ids.length) {
@@ -174,5 +177,9 @@ export class TileController {
 
   setIsBusterBombaActive() {
     this.isBusterBombaActive = true;
+  }
+
+  setGameFinished(value) {
+    this.gameFinished = value;
   }
 }
