@@ -48,6 +48,10 @@ export class TileController {
   handleClickTile(tile) {
     if (this.gameFinished) return;
 
+    if (this.isBusterBombaActive) {
+      this.stopAnimateFlashingTiles();
+    }
+
     const ids = this.removeTiles(tile);
 
     if (ids.length) {
@@ -133,32 +137,20 @@ export class TileController {
 
   animateTiles() {
     this.tiles.forEach((column) => {
-      column.forEach((tile) => {
-        if (tile) {
-          tile.animateSlideDown();
-        }
-      });
+      column.forEach((tile) => tile?.animateSlideDown());
     });
-    // // todo почему то скорость становиться быстрее и быстрее
-    // const id = Ticker.shared.add((delta) => {
-    //   this.tiles.forEach((column) => {
-    //     column.forEach((tile) => {
-    //       if (tile) {
-    //         tile.animateSlideDown(delta);
-    //       }
-    //     });
-    //   });
-    // });
-    //
-    // id.destroy();
+  }
 
-    // this.tiles.forEach((column) => {
-    //   column.forEach((tile) => {
-    //     if (tile) {
-    //       tile.animateSlideDown();
-    //     }
-    //   });
-    // });
+  startAnimateFlashingTiles() {
+    this.tiles.forEach((column) => {
+      column.forEach((tile) => tile?.animateFlashing());
+    });
+  }
+
+  stopAnimateFlashingTiles() {
+    this.tiles.forEach((column) => {
+      column.forEach((tile) => tile?.stopAnimateFlashing());
+    });
   }
 
   mixTiles() {
@@ -177,6 +169,8 @@ export class TileController {
 
   setIsBusterBombaActive() {
     this.isBusterBombaActive = true;
+
+    this.startAnimateFlashingTiles();
   }
 
   setGameFinished(value) {

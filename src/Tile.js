@@ -61,7 +61,6 @@ export class GraphicTile extends Tile {
   }
 
   remove() {
-    // @todo реализовать анимацию без gsap
     gsap.to(this.graphic, {
       alpha: 0,
       ease: 'expo.out',
@@ -82,6 +81,20 @@ export class GraphicTile extends Tile {
       delay: 0.1,
       duration: 0.5,
       ease: 'circ.out',
+    });
+  }
+
+  animateFlashing() {
+    gsap.to(this.graphic, {
+      alpha: 0.5,
+      duration: 0.3,
+    });
+  }
+
+  stopAnimateFlashing() {
+    gsap.to(this.graphic, {
+      alpha: 1,
+      duration: 0.3,
     });
   }
 }
