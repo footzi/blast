@@ -22,6 +22,9 @@ export class Bonus {
   paintContainer() {
     this.container.name = 'bonusContainer';
     this.container.setTransform(this.options.x, this.options.y);
+    this.container.cursor = 'pointer';
+    this.container.eventMode = 'static';
+
     this.rootContainer.addChild(this.container);
   }
 
@@ -59,7 +62,7 @@ export class Bonus {
   }
 
   paintValue() {
-    const value = new Text(
+    this.value = new Text(
       '5',
       new TextStyle({
         fontFamily: 'ShantellSans',
@@ -70,13 +73,19 @@ export class Bonus {
       })
     );
 
-    value.x = 40;
-    value.y = 60;
+    this.value.x = 40;
+    this.value.y = 60;
 
-    this.container.addChild(value);
+    this.container.addChild(this.value);
   }
 
-  changeValue() {}
+  onClick(callback) {
+    this.container.on('pointerdown', () => callback(this));
+  }
+
+  updateValue(value) {
+    this.value.text = value;
+  }
 }
 
 export class Bonuses {
@@ -135,5 +144,17 @@ export class Bonuses {
 
     this.container.addChild(text);
     this.rootContainer.addChild(this.container);
+  }
+
+  onMixClick(callback) {
+    this.mixBonus.onClick(callback);
+  }
+
+  onBombClick(callback) {
+    this.bombaBonus.onClick(callback);
+  }
+
+  updateMixCount(value) {
+    this.mixBonus.updateValue(value);
   }
 }

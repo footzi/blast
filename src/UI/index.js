@@ -26,4 +26,16 @@ export class UI {
   updateScore(value) {
     this.score.updateScore(value);
   }
+
+  onMixBonusClick(callback) {
+    this.bonuses.onMixClick(callback);
+  }
+
+  onBombaBonusClick(callback) {
+    this.bonuses.onBombClick(callback);
+  }
+
+  updateMixCount(value) {
+    this.bonuses.updateMixCount(value);
+  }
 }

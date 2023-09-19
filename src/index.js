@@ -1,6 +1,8 @@
 import { Game } from './Game';
 
-new Game().init();
+new Game({
+  maxMixBonusCount: 5,
+}).init();
 
 // import { Application, Container, Graphics, Sprite } from 'pixi.js';
 // import { BACKGROUND_COLOR } from './constants';

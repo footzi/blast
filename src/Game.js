@@ -6,7 +6,9 @@ import { UI } from './UI';
 import { Field } from './Field';
 
 export class Game {
-  constructor() {
+  constructor(options) {
+    this.gameOptions = options;
+
     this.app = new Application({ background: BACKGROUND_COLOR, resizeTo: window });
     document.body.appendChild(this.app.view);
     globalThis.__PIXI_APP__ = this.app;
@@ -18,6 +20,7 @@ export class Game {
     });
     this.ui = new UI(this.app.stage);
 
+    this.mixBonusCount = this.gameOptions.maxMixBonusCount;
     this.score = 0;
     this.stepsCount = MAX_STEPS;
     this.progress = 0;
@@ -26,17 +29,17 @@ export class Game {
   async init() {
     // @todo загрузка ассетов отдельно
     await Assets.init({ manifest: './assets/manifest.json' });
-
     await new FontFaceObserver('ShantellSans', {}).load();
 
     this.field.paint();
+
     this.ui.paint();
     this.ui.updateSteps(this.stepsCount);
+    this.ui.updateMixCount(this.mixBonusCount);
+
     this.tileController.generateTiles();
 
-    // this.ui.onMixingButtonClick(() => {
-    //   this.tileController.mixTiles();
-    // });
+    this.ui.onMixBonusClick(this.mixTiles.bind(this));
     //
     // this.ui.onBusterBombaClick(() => {
     //   this.tileController.setIsBusterBombaActive();
@@ -54,6 +57,15 @@ export class Game {
     // this.ui.updateScore(this.score);
     // this.ui.updateStep(this.stepsCount);
     this.tileController.regenerate();
+  }
+
+  mixTiles() {
+    this.mixBonusCount--;
+
+    if (this.mixBonusCount >= 0) {
+      this.ui.updateMixCount(this.mixBonusCount);
+      this.tileController.mixTiles();
+    }
   }
 
   handleS(burnedCount) {
