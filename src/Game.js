@@ -1,7 +1,7 @@
 import { TileController } from './TileController';
 import { Application, Assets } from 'pixi.js';
 import FontFaceObserver from 'fontfaceobserver';
-import { BACKGROUND_COLOR, MAX_STEPS, TARGET_SCOPE } from './constants';
+import { BACKGROUND_COLOR } from './constants';
 import { UI } from './UI';
 import { Field } from './Field';
 
@@ -23,12 +23,6 @@ export class Game {
       this.gameOptions
     );
     this.ui = new UI(this.app.stage);
-
-    this.mixBonusCount = this.gameOptions.maxMixBonusCount;
-    this.busterBombaBonusCount = this.gameOptions.maxBusterBombaBonusCount;
-    this.score = 0;
-    this.stepsCount = MAX_STEPS;
-    this.progress = 0;
   }
 
   async init() {
@@ -37,33 +31,38 @@ export class Game {
     await new FontFaceObserver('ShantellSans', {}).load();
 
     this.field.paint();
-
     this.ui.paint();
-    this.ui.updateSteps(this.stepsCount);
-    this.ui.updateMixCount(this.mixBonusCount);
-    this.ui.updateBusterBombaCount(this.busterBombaBonusCount);
 
     this.tileController.generateTiles();
 
     this.ui.onMixBonusClick(this.mixTiles.bind(this));
     this.ui.onBombaBonusClick(this.busterBombaActivate.bind(this));
-    //
-    // this.ui.onBusterBombaClick(() => {
-    //   this.tileController.setIsBusterBombaActive();
-    // });
-    //
-    // this.ui.onRestartButtonClick(() => {
-    //   this.restart();
-    // });
+    this.ui.onClickFailedRetryGame(this.restart.bind(this));
+    this.ui.onClickWinRetryGame(this.restart.bind(this));
+
+    this.setDefaultGameValues();
   }
 
   restart() {
-    this.score = 0;
-    this.stepsCount = MAX_STEPS;
+    this.setDefaultGameValues();
 
-    // this.ui.updateScore(this.score);
-    // this.ui.updateStep(this.stepsCount);
+    this.ui.hideGameFailed();
+    this.ui.hideGameWin();
     this.tileController.regenerate();
+  }
+
+  setDefaultGameValues() {
+    this.mixBonusCount = this.gameOptions.maxMixBonusCount;
+    this.busterBombaBonusCount = this.gameOptions.maxBusterBombaBonusCount;
+    this.score = 0;
+    this.stepsCount = this.gameOptions.maxSteps;
+    this.progress = 0;
+
+    this.ui.updateScore(this.score);
+    this.ui.updateSteps(this.stepsCount);
+    this.ui.updateMixCount(this.mixBonusCount);
+    this.ui.updateBusterBombaCount(this.busterBombaBonusCount);
+    this.ui.updateProgress(this.progress);
   }
 
   mixTiles() {
@@ -88,7 +87,7 @@ export class Game {
     this.score = this.score + burnedCount;
     this.stepsCount = --this.stepsCount;
 
-    this.progress = Number((this.score / TARGET_SCOPE).toFixed(2));
+    this.progress = Number((this.score / this.gameOptions.targetScope).toFixed(2));
 
     if (this.progress <= 1) {
       this.ui.updateProgress(this.progress);
@@ -98,11 +97,11 @@ export class Game {
     this.ui.updateSteps(this.stepsCount);
 
     if (this.stepsCount === 0) {
-      // this.ui.showGameFailed();
+      this.ui.showGameFailed();
     }
 
-    if (this.score >= TARGET_SCOPE) {
-      // this.ui.showGameWin();
+    if (this.score >= this.gameOptions.targetScope) {
+      this.ui.showGameWin();
     }
   }
 }

@@ -59,6 +59,10 @@
         {
           "name": "bonus-background",
           "srcs": "bonus-background"
+        },
+        {
+          "name": "button-background",
+          "srcs": "button-background"
         }
       ]
     }

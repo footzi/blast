@@ -1,10 +1,14 @@
 import { Game } from './Game';
 
-new Game({
+const game = new Game({
+  maxSteps: 10,
+  targetScope: 20,
   maxMixBonusCount: 5,
   maxBusterBombaBonusCount: 3,
   busterBombaBonusRadius: 2,
-}).init();
+});
+
+game.init();
 
 // import { Application, Container, Graphics, Sprite } from 'pixi.js';
 // import { BACKGROUND_COLOR } from './constants';

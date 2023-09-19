@@ -12,9 +12,6 @@ export const TILE_HEIGHT = 46;
 export const COLUMNS_COUNT = 8;
 export const ROWS_COUNT = 8;
 
-export const MAX_STEPS = 10;
-export const TARGET_SCOPE = 10;
-
 export const MOCK_TITLE2 = {
   '0_0': {
     color: 'blue',
