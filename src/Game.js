@@ -10,12 +10,8 @@ export class Game {
   constructor(options) {
     this.gameOptions = options;
 
-    this.app = new Application({ background: Game.BACKGROUND_COLOR, resizeTo: window });
-    document.body.appendChild(this.app.view);
-    globalThis.__PIXI_APP__ = this.app;
-
+    this.app = this.createApp();
     this.field = new Field(this.app.stage, this.gameOptions);
-
     this.tileController = new TileController(
       this.field.getContainer(),
       {
@@ -26,10 +22,16 @@ export class Game {
     this.ui = new UI(this.app.stage);
   }
 
+  createApp() {
+    const app = new Application({ background: Game.BACKGROUND_COLOR, resizeTo: window });
+    document.body.appendChild(app.view);
+    globalThis.__PIXI_APP__ = app;
+
+    return app;
+  }
+
   async init() {
-    // @todo загрузка ассетов отдельно
-    await Assets.init({ manifest: './assets/manifest.json' });
-    await new FontFaceObserver('ShantellSans', {}).load();
+    await this.loadAssets();
 
     this.field.paint();
     this.ui.paint();
@@ -42,6 +44,13 @@ export class Game {
     this.ui.onClickWinRetryGame(this.restart.bind(this));
 
     this.setDefaultGameValues();
+  }
+
+  loadAssets() {
+    const assets = Assets.init({ manifest: './assets/manifest.json' });
+    const font = new FontFaceObserver('ShantellSans', {}).load();
+
+    return Promise.all([assets, font]);
   }
 
   restart() {
